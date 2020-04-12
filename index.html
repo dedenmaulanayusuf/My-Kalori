@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 100%;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">My Kalori</a>
+    </nav>
+    <div class="container mt-5">
+        <form class="w-50">
+
+            <div class="d-flex justify-content-center">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="genderS" id="radiol" value="Laki-Laki">
+                    <label class="form-check-label" for="radiol">
+                        <div class="avatar">
+                            <img src="cowo.png" width="100%" alt="">
+
+                        </div>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="genderS" id="radiop" value="Perempuan">
+                    <label class="form-check-label" for="radiop">
+                        <div class="avatar">
+                            <img src="cewe.png" width="100%" alt="">
+
+                        </div>
+                    </label>
+                </div>
+
+
+            </div>
+
+
+
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">Tinggi Badan (Cm)</label>
+                <input type="number" class="form-control" id="tinggi" aria-describedby="emailHelp">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                    else.</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Berat Badan (Kg)</label>
+                <input type="number" class="form-control" id="berat">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Usia</label>
+                <input type="number" class="form-control" id="usia">
+            </div>
+
+            <label for="exampleInputPassword1">Level Aktivitas Fisik</label>
+            <select class="custom-select" id="level">
+                <option selected value="1">Sedenter (minim aktivitas fisik, jarang/tak pernah olahraga)</option>
+                <option value="2">Sedikit aktif (olahraga ringan 1-3 hari seminggu)</option>
+                <option value="3">Cukup aktif (olahraga sedang, 3-5 hari seminggu)</option>
+                <option value="4">Sangat aktif (olahraga berat 6-7 hari seminggu)</option>
+                <option value="5">Sangat aktif (olahraga 2x sehari atau pekerjaan sehari-hari menuntut fisik)</option>
+
+
+
+            </select>
+
+
+
+            <button id="submit" type="button" class="btn btn-primary">Submit</button>
+        </form>
+        <br>
+        <div id="result"></div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+    <script>
+
+    $(document).ready(function(){
+        $('#submit').click(function(e) {
+            e.preventDefault();
+            
+                var jenkel = $('input[name=genderS]:checked').val(); 
+                var tinggi = parseInt($('#tinggi').val()); 
+                var berat = parseFloat($('#berat').val()); 
+                var usia = $('#usia').val(); 
+                var level = $( "#level option:selected" ).text();
+            
+                if(jenkel === 'Laki-Laki') {
+                    var bil = tinggi - 100 - (0.1 * (tinggi - 100)); 
+                    var bbi = bil.toFixed(1);
+                    var kalori = 30 * bbi;
+                }else{
+                    var bil = tinggi - 100 - (0.15 * (tinggi - 100)); 
+                    var bbi = bil.toFixed(1);
+                    var kalori = 25 * bbi;
+                }
+
+                var bmi;
+                var newTinggi = parseFloat(tinggi/100);
+                bmi = berat / (newTinggi * newTinggi);
+                bmi = bmi.toFixed(1);
+
+
+                if(usia <= 19 || usia >= 70) {
+                    alert('Usia Tidak cukup');
+                }else{
+                        if(bmi <= 18.5) {
+                            alert('BMI anda tidak ideal')
+                        }else{
+                            if(berat <= bbi){
+                                alert('user kurus')
+                            }else{
+                                alert('Maksimal kalori anda : '+kalori)
+                            }
+                        }
+                }
+
+            })
+    });
+
+    </script>
+
+
+</body>
+
+</html>
